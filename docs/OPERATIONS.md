@@ -2,7 +2,7 @@
 
 ## Accès
 - URL : `https://<adresse-du-serveur>/` (LAN d'administration uniquement : réseaux `ROAI_LAN` choisis à l'installation, voir `deploy/Caddyfile`).
-- Certificat : autorité interne de Caddy. Pour supprimer l'avertissement du navigateur, importez **une fois** `/root/ro-ai-ca.crt` comme autorité racine de confiance (Windows : double-clic, « Placer tous les certificats dans le magasin suivant », « Autorités de certification racines de confiance »). Empreinte SHA-256 : `3A:29:FA:4E:B7:93:8F:6E:91:0B:21:2E:34:A4:4C:E7:29:82:CB:B6:1A:CD:86:6A:45:81:22:A4:87:F1:37:6F` (à comparer avant d'approuver).
+- Certificat : autorité interne de Caddy. Pour supprimer l'avertissement du navigateur, importez **une fois** `/root/ro-ai-ca.crt` comme autorité racine de confiance (Windows : double-clic, « Placer tous les certificats dans le magasin suivant », « Autorités de certification racines de confiance »). Calculez l'empreinte SHA-256 sur votre serveur avec `openssl x509 -in /root/ro-ai-ca.crt -noout -fingerprint -sha256`, puis comparez-la à celle du certificat reçu via un canal de confiance avant de l'importer. N'utilisez jamais une empreinte provenant d'une autre installation.
 - Identifiants initiaux : `/root/ro-ai-first-login.txt` (lecture réservée à root). Pour changer le mot de passe : `PYTHONPATH=/opt/ro-ai/backend python3 -m roai.cli set-password`.
 
 ## Connexion des fournisseurs (abonnement, par les clients officiels)
@@ -51,5 +51,5 @@ deploy/install.sh                    # réinstalle/redémarre les services aprè
 cd /opt/ro-ai/backend && python3 -m pytest -q tests       # noyau et serveur web (faux clients de test)
 cd /opt/ro-ai/web && npm run typecheck && node --test $(find src -name '*.test.ts')
 cd /opt/ro-ai/web && npx vite build                        # produit web/dist, servi tel quel
-deploy/dev-stack.sh start                                  # pile jetable avec faux clients : http://127.0.0.1:18081 (admin / dev-password-12345)
+deploy/dev-stack.sh start                                  # pile jetable avec faux clients : http://127.0.0.1:18081 (identifiants aléatoires : `/var/tmp/ro-ai-dev/dev-login.txt`)
 ```
