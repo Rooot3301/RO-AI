@@ -1,0 +1,10 @@
+.login {
+  min-height: 100vh; display: grid; place-items: center; padding: 24px;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px; background-position: center;
+}
+.login__frame { width: min(400px, 100%); background: var(--ink-850); padding: 0; --bracket: var(--amber); --bs: 14px; }
+.login__brand { padding: 26px 28px 20px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid var(--line); color: #eef1f6; }
+.login__sub { }
+.login__form { padding: 22px 28px 8px; display: flex; flex-direction: column; gap: 16px; }
+.login__foot { padding: 14px 28px 20px; color: var(--text-faint); font-size: 12px; }

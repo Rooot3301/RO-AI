@@ -1,0 +1,37 @@
+[Unit]
+Description=RO·AI noyau d'orchestration (agents IA, clients officiels uniquement)
+Requires=ro-ai-core.socket
+After=network-online.target user@1000.service
+Wants=user@1000.service
+
+[Service]
+Type=simple
+User=agent
+Group=agent
+UMask=0077
+WorkingDirectory=/srv/ai
+Environment=PYTHONPATH=/opt/ro-ai/backend
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=ROAI_DOMAIN=perso
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+Environment=ROAI_ISOLATE=systemd
+ExecStart=/usr/bin/python3 -m uvicorn roai.core_api:create_app --factory --fd 3 --log-level info --no-server-header
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=30
+KillMode=mixed
+# durcissement : le noyau n'écrit que sous /srv/ai ; les clients tournent dans leurs propres unités utilisateur
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ReadWritePaths=/srv/ai /home/agent
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=no
+RestrictSUIDSGID=yes
+LockPersonality=yes
+SyslogIdentifier=ro-ai-core
+
+[Install]
+WantedBy=multi-user.target

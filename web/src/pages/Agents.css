@@ -1,0 +1,6 @@
+.agcell { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.agcell__txt { display: flex; flex-direction: column; min-width: 0; }
+.agcell__slug { font-size: 12px; }
+.lastrun { display: inline-flex; align-items: center; gap: 10px; color: inherit; }
+.lastrun:hover { text-decoration: none; }
+.agents-tbl td { height: 52px; }

@@ -1,0 +1,29 @@
+/* RO·AI — jetons de design partagés (Control Center + Virtual Office).
+   Direction : sobre et lisible. Graphite neutre, accent ambre utilisé avec parcimonie, une seule famille de texte (Inter),
+   la monospace est réservée aux identifiants, au code et aux journaux. */
+:root {
+  /* Surfaces (du plus profond au plus clair) */
+  --ink-950: #0e1013; --ink-900: #121418; --ink-850: #181b20; --ink-800: #1e2229; --ink-700: #282d36; --ink-600: #373e4a;
+  --line: #242932; --line-strong: #323946;
+  /* Texte (contrastes AA sur --ink-900/850) */
+  --text: #e9ebef; --text-dim: #a7aebb; --text-faint: #8590a2;
+  /* Accent et états */
+  --amber: #f5a742; --amber-dim: #8b6428; --amber-glow: rgba(245, 167, 66, .14);
+  --ok: #4ccaa1; --ok-dim: #25695a;
+  --err: #f26d5d; --err-dim: #7b3029;
+  --info: #6fb0f2; --warn: #e6c04c;
+  --radius: 8px; --radius-sm: 6px;
+  /* Typographie */
+  --font-ui: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-cond: var(--font-ui);
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-pixel: 'Silkscreen', monospace;
+  /* — extensions Control Center — */
+  --amber-bright: #ffbd5c; --amber-ink: #1b1305; --amber-wash: rgba(245, 167, 66, .09);
+  --err-wash: rgba(242, 109, 93, .10); --ok-wash: rgba(76, 202, 161, .09);
+  --err-text: #ff9484; --grid: transparent;
+  --sidebar-w: 232px; --topbar-h: 52px;
+  --fs-micro: 12.5px; --fs-small: 12.5px; --fs-body: 14px; --fs-lg: 16px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  color-scheme: dark;
+}

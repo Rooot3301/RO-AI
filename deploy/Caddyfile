@@ -1,0 +1,24 @@
+# RO·AI : HTTPS interne, accessible depuis le LAN d'administration uniquement.
+# Modèle : deploy/install.sh remplace __ROAI_ADDRESS__ et __ROAI_LAN__ par les valeurs de votre installation.
+{
+	admin off
+	auto_https disable_redirects
+	skip_install_trust
+}
+
+https://__ROAI_ADDRESS__ {
+	tls internal
+	@lan remote_ip __ROAI_LAN__ 127.0.0.1
+	handle @lan {
+		reverse_proxy 127.0.0.1:8081 {
+			flush_interval -1
+			header_up X-Forwarded-Proto https
+		}
+	}
+	handle {
+		respond "Accès refusé" 403
+	}
+	log {
+		output stderr
+	}
+}

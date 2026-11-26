@@ -1,0 +1,37 @@
+[Unit]
+Description=RO·AI serveur web (Control Center, Virtual Office) : aucun accès aux jetons des fournisseurs
+Requires=ro-ai-core.socket
+After=ro-ai-core.socket
+
+[Service]
+Type=simple
+User=ro-ai-web
+Group=ro-ai-web
+SupplementaryGroups=ro-ai
+UMask=0077
+StateDirectory=ro-ai-web
+StateDirectoryMode=0700
+Environment=PYTHONPATH=/opt/ro-ai/backend
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=ROAI_CORE_SOCKET=/run/ro-ai/core.sock
+Environment=ROAI_STATIC_DIR=/opt/ro-ai/web/dist
+Environment=ROAI_WEB_STATE_DIR=/var/lib/ro-ai-web
+ExecStart=/usr/bin/python3 -m uvicorn roai.web:create_web_app --factory --host 127.0.0.1 --port 8081 --log-level info --no-server-header --timeout-graceful-shutdown 3
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+LockPersonality=yes
+SystemCallArchitectures=native
+SyslogIdentifier=ro-ai-web
+
+[Install]
+WantedBy=multi-user.target

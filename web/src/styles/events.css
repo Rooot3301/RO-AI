@@ -1,0 +1,19 @@
+.evlist { margin: 0; }
+.evrow { border-bottom: 1px solid var(--line); }
+.evrow:last-child { border-bottom: 0; }
+.evrow__line { display: flex; align-items: flex-start; gap: 10px; padding: 6px 12px; min-width: 0; }
+.evrow__line .led { margin-top: 5px; }
+.evrow__time { color: var(--text-faint); font-size: 12px; padding-top: 1px; flex: none; }
+.evrow__main { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-size: 12.5px; }
+.evrow__title { font-weight: 500; color: var(--text); }
+.evrow__title--ok { color: var(--ok); } .evrow__title--warn { color: var(--warn); } .evrow__title--err { color: var(--err-text); }
+.evrow__title--amber { color: var(--amber); } .evrow__title--info { color: var(--info); }
+.evrow__agent { font: 400 12px var(--font-mono); color: var(--text-dim); }
+.evrow__run { font-size: 12px; color: var(--text-faint); }
+.evrow__detail { color: var(--text-dim); flex-basis: 100%; font-size: 12px; max-height: 6.6em; overflow: hidden; }
+.evrow--compact .evrow__detail { flex-basis: auto; }
+.evrow--compact .evrow__line { padding: 5px 12px; }
+.evrow--error { background: var(--err-wash); }
+.evrow__toggle { background: none; border: 0; color: var(--text-faint); font: 500 12px var(--font-ui); padding: 2px 4px; flex: none; }
+.evrow__toggle:hover { color: var(--amber); }
+.evrow__raw { margin: 0; padding: 8px 12px 10px 92px; font-size: 12px; color: var(--text-dim); background: var(--ink-950); border-top: 1px solid var(--line); max-height: 280px; overflow: auto; }

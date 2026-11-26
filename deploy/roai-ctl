@@ -1,0 +1,19 @@
+#!/bin/bash
+# Contrôle d'urgence de RO·AI en ligne de commande. Parle directement au noyau (socket Unix) : fonctionne même si le site web est arrêté.
+#   roai-ctl status | stop [motif] | resume
+SOCK=/run/ro-ai/core.sock
+call() { curl -s --max-time 30 --unix-socket "$SOCK" -H 'Content-Type: application/json' "$@"; }
+show() { python3 -c '
+import sys, json
+try: c = json.load(sys.stdin)
+except Exception: print("Réponse illisible : le noyau est-il démarré ? (systemctl status ro-ai-core)"); sys.exit(1)
+if "detail" in c: print("Erreur :", c["detail"]); sys.exit(1)
+if c["paused"]: print("ARRÊT D URGENCE ACTIF depuis", c["since"], "| motif :", c["reason"] or "(aucun)", "| exécutions annulées :", c["cancelled"])
+else: print("Fonctionnement normal : aucun arrêt d urgence.")'; }
+case "${1:-status}" in
+  status) call http://core/api/control | show ;;
+  stop)   shift; body=$(python3 -c 'import json,sys; print(json.dumps({"reason": " ".join(sys.argv[1:]) or None}))' "$@")
+          call -X POST -d "$body" http://core/api/control/emergency-stop | show ;;
+  resume) call -X POST http://core/api/control/resume | show ;;
+  *) echo "Usage : roai-ctl status | stop [motif] | resume" >&2; exit 2 ;;
+esac

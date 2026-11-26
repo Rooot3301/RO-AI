@@ -1,0 +1,12 @@
+node_modules/
+web/dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+*.db
+*.db-wal
+*.db-shm
+.env
+*.log
+web/tsconfig.tsbuildinfo

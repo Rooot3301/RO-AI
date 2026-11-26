@@ -1,0 +1,8 @@
+#!/bin/bash
+# Lance la connexion OFFICIELLE d'un client IA pour l'utilisateur agent (abonnement). RO·AI ne voit jamais les jetons.
+case "${1:-}" in
+  claude) exec runuser -l agent -c 'claude auth login' ;;
+  codex)  exec runuser -l agent -c 'codex login --device-auth' ;;
+  status) runuser -l agent -c 'claude auth status --text; codex login status' 2>&1 | grep -v -E "^\s*$|community|Debian LXC|Hostname|IP Address|OS:" ;;
+  *) echo "Usage : roai-login claude | codex | status" >&2; exit 2 ;;
+esac
