@@ -16,6 +16,10 @@
 
 </div>
 
+<p align="center">
+  <img src="office-day.png" alt="RO-AI — Virtual Office en journée" width="100%">
+</p>
+
 ---
 
 > **Première itération — v0.1.0.** RO·AI est un projet expérimental en développement actif. L'architecture, les fonctionnalités, les mécanismes de sécurité et le déploiement sont voués à évoluer. Cette version ne constitue pas une garantie de stabilité ou de sécurité pour un environnement de production.
